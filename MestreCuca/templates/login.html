@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f0f2f5;
+            }
+
+            .login-container {
+                background-color: white;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+                position: relative;
+            }
+
+            h2 {
+                color: #1c1e21;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .input-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: #606770;
+                font-size: 15px;
+            }
+
+            input {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #dddfe2;
+                border-radius: 6px;
+                font-size: 15px;
+                box-sizing: border-box;
+            }
+
+            input:focus {
+                outline: none;
+                border-color: #1877f2;
+                box-shadow: 0 0 0 2px #e7f3ff;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px;
+                background-color: #1877f2;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            button:hover {
+                background-color: #166fe5;
+            }
+
+            .options {
+                display: flex;
+                justify-content: space-between;
+                margin: 15px 0;
+                font-size: 14px;
+            }
+
+            a {
+                color: #1877f2;
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            .signup {
+                text-align: center;
+                margin-top: 20px;
+                color: #606770;
+            }    
+            
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+            }
+
+            .dark-mode {
+                --bg-color: #1a1a1a;
+                --text-color: #ffffff;
+            }
+
+            .day-mode {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+            #themeToggle {
+                width: auto;
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                padding: 8px 12px;
+                font-size: 1.2em;
+                background: none;
+                border: 1px solid var(--text-color);
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>    
+    
+        <div class="login-container">
+            <h2>Login</h2>
+            <button onclick="toggleTheme()" id="themeToggle">🌙</button>
+            
+            <form action="{{url_for('users.login')}}" method="post" id="login_form">
+                <div class="input-group">
+                    <label for="username">Nome de usuário ou email</label>
+                    <input type="text" id="username" name="nome" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="senha" required>
+                </div>
+
+                <button type="submit">Entrar</button>
+            </form>
+
+            <div class="signup">
+                Não tem uma conta? <a href="{{url_for('users.cadastrar_user')}}">Cadastre-se</a>
+            </div>
+        </div> 
+
+        <script>
+            function toggleTheme() {
+                const body = document.body;
+                const themeButton = document.getElementById('themeToggle');
+                
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('day-mode');
+                    themeButton.textContent = '🌙';
+                    localStorage.setItem('theme', 'day');
+                } else {
+                    body.classList.remove('day-mode');
+                    body.classList.add('dark-mode');
+                    themeButton.textContent = '☀️';
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+    
+            // Carregar tema salvo ao iniciar
+            document.addEventListener('DOMContentLoaded', () => {
+                const savedTheme = localStorage.getItem('theme') || 'day';
+                const body = document.body;
+                const themeButton = document.getElementById('themeToggle');
+                
+                if (savedTheme === 'dark') {
+                    body.classList.add('dark-mode');
+                    themeButton.textContent = '☀️';
+                } else {
+                    body.classList.add('day-mode');
+                    themeButton.textContent = '🌙';
+                }
+            });
+        </script>
+    </body>
+</html>
