@@ -17,5 +17,23 @@ class Receita(Base, UserMixin):
     def exists(cls, nome_receita):
         return db_session.query(cls).filter_by(nome_receita=nome_receita).first() is not None
     
+    @classmethod
+    def delet(cls, id):
+        Session = sessionmaker(bind=engine)
+        session = Session()
 
+        delet = (delete(Receita).where(Receita.id == id))
+        
+        session.execute(delet)
+        session.commit()
+
+    @classmethod
+    def update(cls, id, nome_receita, nome_user, ingredientes, modo_preparo, categoria):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        smt = (update(Receita).where(Receita.id == id).values(nome_receita=nome_receita, nome_user=nome_user, ingredientes=ingredientes, modo_preparo=modo_preparo, categoria=categoria))
+
+        session.execute(smt)
+        session.commit()
     
