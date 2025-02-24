@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Text, ForeignKey
+from sqlalchemy import Text, ForeignKey, delete, update
 from database.db import Base, db_session
 from flask_login import UserMixin
 
