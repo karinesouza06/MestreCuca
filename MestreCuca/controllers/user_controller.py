@@ -55,3 +55,10 @@ def cadastrar_user():
 
     return render_template("cadastrar_usuarios.html")
 
+
+@user_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("Você foi desconectado.")
+    return redirect(url_for('index'))
