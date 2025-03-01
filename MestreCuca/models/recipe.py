@@ -16,7 +16,16 @@ class Receita(Base, UserMixin):
     @classmethod
     def exists(cls, nome_receita):
         return db_session.query(cls).filter_by(nome_receita=nome_receita).first() is not None
-    
+
+    @classmethod
+    def get_receitas_usuario(cls, id):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        receitas = session.query(Receita).filter(Receita.
+        
+        session.execute(delet)
+        session.commit()
     @classmethod
     def delet(cls, id):
         Session = sessionmaker(bind=engine)
