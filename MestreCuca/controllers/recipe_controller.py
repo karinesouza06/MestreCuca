@@ -29,8 +29,10 @@ def cadastrar_receitas():
             return render_template('pagina_receitas.html')
     return render_template('cadastrar_receitas.html')
 
-
-
+@recipe_bp.route('/pagina_receitas', methods=['GET'])
+def listar_todas_receitas():
+    receitas = Receita.get_receitas()
+    return render_template('pagina_receitas.html', receitas=receitas)
 
     
    
