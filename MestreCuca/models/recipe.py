@@ -2,7 +2,6 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Text, ForeignKey, delete, update
 from database.db import Base, db_session
 from flask_login import UserMixin
-import User
 
 class Receita(Base, UserMixin):
     __tablename__ = 'receitas'
@@ -19,11 +18,11 @@ class Receita(Base, UserMixin):
         return db_session.query(cls).filter_by(nome_receita=nome_receita).first() is not None
 
     @classmethod
-    def get_receitas_usuario(cls):
+    def get_receitas_usuario(cls, nome):
         Session = sessionmaker(bind=engine)
         session = Session()
 
-        receitas = session.query(Receita).filter(Receita.nome_user == User.nome).all()
+        receitas = session.query(Receita).filter(Receita.nome_user == nome).all()
         
         returns receitas
         session.commit()
