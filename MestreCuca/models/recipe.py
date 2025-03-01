@@ -24,7 +24,7 @@ class Receita(Base, UserMixin):
 
         receitas = session.query(Receita).filter(Receita.nome_user == nome).all()
         
-        returns receitas
+        return receitas
         session.commit()
 
     @classmethod
@@ -34,7 +34,7 @@ class Receita(Base, UserMixin):
 
         receitas = session.query(Receita).all()
         
-        returns receitas
+        return receitas
         session.commit()
         
     @classmethod
