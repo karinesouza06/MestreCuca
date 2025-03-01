@@ -34,6 +34,20 @@ def listar_todas_receitas():
     receitas = Receita.get_receitas()
     return render_template('pagina_receitas.html', receitas=receitas)
 
-    
-   
+@recipe_bp.route('/editar_receita', methods=['GET', 'POST'])
+def editar_receita():
+    if request.method == 'POST':
+        nome_user = request.form['nome_user']
+        nome_receita = request.form['nome_receita']
+        categoria = request.form['categoria']
+        ingredientes = request.form['ingredientes']
+        modo_preparo = request.form['modo_preparo']
+        
+        Receita.update(nome_user, nome_receita, categoria, ingredientes, modo_preparo)
+        return redirect(url_for('recepies.listar_todas_receitas'))
+        
+@recipe_bp.route('/excluir_receita/<int:id>', methods=['GET'])
+def excluir_receitas(id):   
+       Receita.delete(id)
+       return redirect(url_for('recepies.listar_todas_receitas'))
     
