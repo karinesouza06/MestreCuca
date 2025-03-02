@@ -3,11 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Bem Vindo(a)!</title>
+        <link rel="stylesheet" href="/static/css/style.css">
 
     </head>
     <body>
-        <button><a href="{{url_for('users.cadastrar_user')}}">Cadastrar-se</a></button>
-        <button><a href="{{url_for('users.login')}}">Login</a></button>
+        <div class="div-index">
+            <div class="div-index-left">
+
+            </div>
+            <div class="div-index-right">
+                <div class="div-index-content">
+                    <div class="div-index-image">
+                        <img src="/static/images/mestre-cuca_login2.png">
+                    </div>
+                    <div class="div-index-text">
+                        <p>Bem vindo(a)! Crie e encontre receitas maravilhosas criadas por você e diversas pessoas.</p>
+                    </div>
+                    <br>
+                    <a href="{{url_for('users.login')}}"><button type="submit">Login</button></a>
+                    <br>
+                    <div class="div-index-text-register">
+
+                        <p>Não possui login ? |</p>
+                        <a href="{{url_for('users.cadastrar_user')}}">Cadastre-se</a>
+
+                    </div>
+                    
+            
+                </div>
+                
+            </div>
+        </div>
     </body>
 </html>
+
