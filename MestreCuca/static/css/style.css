@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    /* background-image: url("/static/images/mestre-cuca_fundo3.png");
+    background-repeat: no-repeat;  
+    background-size: 100%;        */
+    
+}
+
+.div-index {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.div-index-left {
+    width: 60%;
+    height: 100vh;
+    background-image: url("/static/images/mestre-cuca_fundo4.png");
+}
+
+.div-index-right {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #db6825, #964d00);
+    float: right;
+    height: 100vh;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+
+    
+     
+}
+
+.div-index-content {
+    display: flex;
+    flex-direction: column;
+    background-color:#ffffff;
+    float: right;
+    height: 60%;
+    width: 80%;
+    align-items: center;
+    border-radius: 20px;
+     
+}
+
+.div-index-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-index img {
+    width: 300px;
+    height: 255px;
+}
+
+
+.div-index-text {
+    width: 70%;
+} 
+
+
+
+.div-index-text p {
+    font-size: 16px;
+    text-align: center;
+
+}
+
+.div-index-text-register {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+} 
+
+
+.div-index-text-register p {
+    font-size: 16px;
+}
+
+.div-index-text-register a {
+    font-style: italic;
+    color: black;
+    margin-left: 5px;
+}
+
+
+.div-index button {
+    background-color:black;
+    font-size: 16px;
+    color: white;
+    padding: 10px;
+    width: 150px;
+    border-radius: 20px;
+    border: 0;
+
+}
+
+.div-index button:hover {
+    background-color:#db6825;
+    color: white;
+    padding: 10px;
+    width: 150px;
+    border-radius: 20px;
+    border: 0;
+
+}
