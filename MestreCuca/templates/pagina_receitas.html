@@ -3,9 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url("/static/images/mestre-cuca_fundo5.png");
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #ffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+        }
+
+        .logo img {
+            width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        .sidebar {
+            width: 85px; 
+            background-color:  #db6825;
+            color: white;
+            height: calc(100vh - 80px); 
+            position: fixed;
+            top: 80px; 
+            left: 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 10px;
+            z-index: 999; 
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px; 
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            width: 100%;
+            font-size: 21px;
+            display: block;
+        }
+
+        .logout-icon {
+            margin-top: 470px;
+        }
+
+        .main-content {
+            margin-top: 50px;
+            height: calc(100vh - 80px); /* Ajusta a altura para não ultrapassar o cabeçalho */
+            margin-left: 85px;
+            padding: 10px;
+            padding-top: 70px;
+            display: flex;
+            flex-wrap: wrap; /* Permite a quebra de linha */
+            justify-content: flex-start; /* Alinha à esquerda */
+            
+        }
+
+        .recipe-card {
+            background-color: #db6825; /* Cor de fundo da receita */
+            border-radius: 10px; /* Bordas arredondadas */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra */
+            width: calc(30%); /* Largura da div da receita */
+            margin: 5px; /* Margem de 5px entre as receitas */
+            padding: 10px; /* Espaçamento interno */
+            display: flex;
+            flex-direction: column; /* Alinhamento vertical */
+            overflow: hidden; /* Para evitar que os conteúdos excedam o tamanho da div */
+        }
+
+        .user-recipes {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Alinha à esquerda */
+            width: 100%;
+            margin-bottom: 10px; /* Espaçamento entre as seções */
+        }
+
+        .user-recipes img {
+            width: 40px; /* Largura da imagem */
+            height: 40px; /* Altura da imagem */
+            margin-right: 10px; /* Espaço entre a imagem e o nome */
+        }
+
+        .recipes-content {
+            background-color: #eb8b53; /* Cor de fundo da seção de ingredientes */
+            display: flex;
+            flex-direction: column; /* Empilha verticalmente */
+            width: 100%; /* Largura total */
+            padding: 10px; /* Espaçamento interno */
+            border-radius: 5px; /* Bordas arredondadas */
+            margin-bottom: 10px; /* Espaçamento entre as receitas */
+            overflow-y: auto; /* Adiciona rolagem se o conteúdo exceder */
+            max-height: 100px; /* Limita a altura da div de ingredientes */
+        }
+
+        .button-recipes {
+            height: 40px; /* Altura do botão */
+            width: 100%; /* Faz o botão ocupar toda a largura */
+            background-color: #df974a; /* Cor de fundo do botão */
+            color: white; /* Cor do texto do botão */
+            border: none; /* Remove borda padrão */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            margin-top: 10px; /* Espaçamento acima do botão */
+        }
+
+        .my-recipes {
+            justify-content:space-evenly;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            border: 1px solid rgb(215, 215, 215);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow-y: scroll;
+        }
+        h5, h6, p {
+            color: white;
+        }
+
+        .modal {
+            display: none; /* Oculta o modal inicialmente */
+            position: fixed;
+            z-index: 1001; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            margin: auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: justify;
+        }
+        .modal-content p {
+            color:black;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Página de receitas</h1>
+    <header>
+        <div class="logo">
+            <img src="/static/images/mestre-cuca_logo.png" alt="Logo do Sistema" id="logo-sistema">
+        </div>
+    </header>
+
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{url_for('recipes.cadastrar_receitas')}}"><i class="fa-solid fa-user"></i></a></li>
+            <li><a href="{{url_for('recipes.pagina_receitas')}}"><i class="fa-solid fa-utensils"></i></a></li>
+            <li><a href="{{url_for('users.logout')}}" class="logout-icon"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="my-recipes">
+            {% for receita in receitas %}
+                <div class="recipe-card">
+                    <div class="user-recipes">
+                        <img src="/static/images/mestre-cuca-icon-chapeu.png" alt="Ícone do Usuário">
+                        <h5>{{ receita.nome_user }}</h5>
+                    </div>
+
+                    <div class="recipes-content">
+                        <h5>{{ receita.nome_receita }}</h5>
+                        <h6>Ingredientes</h6>
+                        <p>{{ receita.ingredientes }}</p>
+                    </div>
+
+                    <button type="button" class="button-recipes" data-modo-preparo="{{ receita.modo_preparo }}">Abrir</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal para mostrar o modo de preparo -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Modo de Preparo</h2>
+            <p id="modoPreparoContent"></p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var btns = document.getElementsByClassName("button-recipes");
+        var span = document.getElementsByClassName("close")[0];
+        var modoPreparoContent = document.getElementById("modoPreparoContent");
+
+        // Adiciona evento de clique para cada botão
+        Array.from(btns).forEach(function(btn) {
+            btn.onclick = function() {
+                // Define o conteúdo do modo de preparo
+                modoPreparoContent.textContent = this.getAttribute("data-modo-preparo");
+                modal.style.display = "block"; // Abre o modal
+            }
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none"; // Fecha o modal
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none"; // Fecha o modal se clicar fora dele
+            }
+        }
+    </script>
 </body>
 </html>
