@@ -1,7 +1,8 @@
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import Text, ForeignKey, delete, update
-from database.db import Base, db_session
+from sqlalchemy.orm import Mapped, mapped_column, sessionmaker 
+from sqlalchemy import Text, ForeignKey,  delete, update
+from database.db import Base, db_session, engine
 from flask_login import UserMixin
+
 
 class Receita(Base, UserMixin):
     __tablename__ = 'receitas'
@@ -16,6 +17,7 @@ class Receita(Base, UserMixin):
     @classmethod
     def exists(cls, nome_receita):
         return db_session.query(cls).filter_by(nome_receita=nome_receita).first() is not None
+
 
     @classmethod
     def get_receitas_usuario(cls, nome):
@@ -36,7 +38,7 @@ class Receita(Base, UserMixin):
         
         return receitas
         session.commit()
-        
+    
     @classmethod
     def delet(cls, id):
         Session = sessionmaker(bind=engine)
