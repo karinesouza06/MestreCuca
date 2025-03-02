@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, url_for, flash, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
-from models.user import User
+from models.user import User, current_user
 from database.db import db_session
 
 from flask_login import LoginManager, login_user, login_required, logout_user
@@ -22,7 +22,7 @@ def login():
         if user and check_password_hash(user.senha, senha): 
             login_user(user)
             flash("Você está logado")
-            return render_template("perfil_usuario.html")
+            return render_template("cadastrar_receitas.html", user=user)
             #return redirect(url_for('recipes.cadastrar_receitas'))
         else:
             flash("Dados incorretos")
@@ -55,10 +55,10 @@ def cadastrar_user():
 
     return render_template("cadastrar_usuarios.html")
 
-
 @user_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash("Você foi desconectado.")
     return redirect(url_for('index'))
+
