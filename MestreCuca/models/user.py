@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Text, ForeignKey
 from database.db import Base, db_session
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 
 class User(Base,UserMixin):
     __tablename__ = 'usuarios'
